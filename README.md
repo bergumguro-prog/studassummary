@@ -9,13 +9,20 @@ Everything runs on your own computer using [Ollama](https://ollama.com) and a sm
 
 ## How it works
 
+```mermaid
+flowchart LR
+    Browser["Browser<br/>static/index.html + app.js"] -->|"upload file<br/>/summary, /quiz"| API["main.py<br/>FastAPI"]
+    API --> Extract["text_extraction.py<br/>PDF/.txt → text"]
+    API --> LLM["llm.py<br/>prompts + retries"]
+    LLM --> Schemas["schemas.py<br/>Pydantic validation"]
+    LLM -->|JSON mode| Ollama[("Ollama<br/>llama3.2")]
 ```
-Browser (static/)  ──upload──▶  FastAPI (main.py)
-                                   │
-                                   ├─ text_extraction.py   PDF/.txt → plain text (+ truncation)
-                                   ├─ llm.py               prompt → Ollama → JSON → validated with Pydantic
-                                   └─ schemas.py           the data shapes (Summary, Quiz, ...)
-```
+
+1. The browser uploads a file to `main.py`.
+2. `text_extraction.py` turns it into plain text, shortening it if it's too long.
+3. `llm.py` sends the text and a prompt to Ollama and asks for JSON.
+4. The JSON is checked against the models in `schemas.py`. If it's wrong, `llm.py` asks the model again.
+5. `main.py` sends the result back to the browser, which shows the summary or quiz.
 
 | File | What it does |
 |---|---|
