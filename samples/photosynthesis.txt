@@ -1,0 +1,13 @@
+Lecture 4: Photosynthesis
+
+Photosynthesis is the process by which plants, algae and some bacteria convert light energy into chemical energy stored in glucose. It takes place in the chloroplasts, mainly in leaf cells.
+
+The overall equation is: 6 CO2 + 6 H2O + light energy -> C6H12O6 + 6 O2.
+
+Photosynthesis has two stages:
+1. The light-dependent reactions happen in the thylakoid membranes. Chlorophyll absorbs light, water is split (photolysis), oxygen is released as a by-product, and ATP and NADPH are produced.
+2. The light-independent reactions (the Calvin cycle) happen in the stroma. The enzyme RuBisCO fixes CO2 onto RuBP. ATP and NADPH from the first stage are used to build G3P, which is used to make glucose.
+
+Limiting factors: light intensity, CO2 concentration and temperature. Enzymes like RuBisCO denature at high temperatures, so the rate drops above the optimum.
+
+C4 and CAM plants have adaptations that reduce photorespiration in hot, dry climates.
