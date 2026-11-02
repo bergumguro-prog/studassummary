@@ -1,0 +1,236 @@
+/* ---------- Colors and basic settings ----------
+   CSS variables ("custom properties") let us define colors once and reuse
+   them. The second block switches to dark colors if the user's device is
+   in dark mode. */
+:root {
+  --bg: #f5f6fa;
+  --card: #ffffff;
+  --text: #1f2330;
+  --muted: #6b7080;
+  --border: #dde0e8;
+  --primary: #3b5bdb;
+  --primary-hover: #2f4ac0;
+  --correct: #2b8a3e;
+  --correct-bg: #ebfbee;
+  --wrong: #c92a2a;
+  --wrong-bg: #fff5f5;
+  --notice-bg: #fff9db;
+  --notice-border: #f0c419;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15171e;
+    --card: #1f222b;
+    --text: #e6e8ee;
+    --muted: #9a9fb0;
+    --border: #343846;
+    --primary: #5c7cfa;
+    --primary-hover: #748ffc;
+    --correct: #69db7c;
+    --correct-bg: #1b3022;
+    --wrong: #ff8787;
+    --wrong-bg: #3a1f22;
+    --notice-bg: #3a331a;
+    --notice-border: #a8891a;
+  }
+}
+
+* {
+  box-sizing: border-box; /* width includes padding and border: easier layouts */
+}
+
+/* Make sure the "hidden" attribute always hides, even if a rule sets display */
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.55;
+}
+
+/* ---------- Layout ---------- */
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+header h1 {
+  margin: 0 0 4px;
+  font-size: 1.8rem;
+}
+
+.subtitle {
+  margin: 0 0 20px;
+  color: var(--muted);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+h2 { margin-top: 0; font-size: 1.3rem; }
+h3 { margin-bottom: 6px; font-size: 1.05rem; }
+
+.muted { color: var(--muted); }
+.small { font-size: 0.875rem; }
+
+/* ---------- Form ---------- */
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+input, select, button {
+  font: inherit; /* form elements don't inherit fonts by default */
+}
+
+input[type="file"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.field { flex: 1; }
+
+.buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+button {
+  flex: 1;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) { background: var(--primary-hover); }
+button:disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* ---------- Messages ---------- */
+.message {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border: 1px solid;
+}
+
+.message.error {
+  background: var(--wrong-bg);
+  border-color: var(--wrong);
+  color: var(--wrong);
+}
+
+.message.notice {
+  background: var(--notice-bg);
+  border-color: var(--notice-border);
+}
+
+/* ---------- Loading spinner ---------- */
+.loading { text-align: center; }
+.loading p { margin: 6px 0; }
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  margin: 4px auto 12px;
+  border: 4px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- Summary ---------- */
+#key-concepts { padding-left: 20px; margin-top: 0; }
+#key-concepts li { margin-bottom: 4px; }
+
+/* ---------- Quiz ---------- */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+/* Answer buttons look like outlined boxes, not like the blue main buttons */
+.option {
+  text-align: left;
+  background: var(--bg);
+  color: var(--text);
+  border: 2px solid var(--border);
+  font-weight: 400;
+}
+
+.option:hover:not(:disabled) {
+  background: var(--bg);
+  border-color: var(--primary);
+}
+
+.option:disabled { opacity: 1; cursor: default; }
+
+.option.correct {
+  border-color: var(--correct);
+  background: var(--correct-bg);
+}
+
+.option.wrong {
+  border-color: var(--wrong);
+  background: var(--wrong-bg);
+}
+
+.feedback {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  background: var(--bg);
+}
+
+.feedback strong.correct { color: var(--correct); }
+.feedback strong.wrong { color: var(--wrong); }
+
+#next-btn, #retake-btn { width: 100%; }
+
+.score {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+/* ---------- Small screens (phones) ---------- */
+@media (max-width: 480px) {
+  .container { padding-top: 16px; }
+  header h1 { font-size: 1.5rem; }
+  .card { padding: 16px; }
+  .buttons { flex-direction: column; } /* stack the two buttons */
+}

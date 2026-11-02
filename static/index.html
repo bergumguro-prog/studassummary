@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Makes the page scale correctly on phones -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Study Assistant</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Study Assistant</h1>
+      <p class="subtitle">Upload your lecture notes to get a summary or a practice quiz.</p>
+    </header>
+
+    <!-- Shown if Ollama isn't running or the model is missing (filled in by app.js) -->
+    <div id="status-banner" class="message error" hidden></div>
+
+    <!-- Upload form -->
+    <section class="card">
+      <form id="upload-form">
+        <label for="file-input">Lecture notes (PDF or .txt)</label>
+        <input type="file" id="file-input" accept=".pdf,.txt" required>
+
+        <div class="row">
+          <div class="field">
+            <label for="difficulty">Difficulty</label>
+            <select id="difficulty">
+              <option value="easy">Easy</option>
+              <option value="medium" selected>Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="num-questions">Questions</label>
+            <input type="number" id="num-questions" value="5" min="1" max="15">
+          </div>
+        </div>
+
+        <div class="buttons">
+          <button type="button" id="summary-btn">Summarize</button>
+          <button type="button" id="quiz-btn">Generate quiz</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Loading indicator -->
+    <div id="loading" class="card loading" hidden>
+      <div class="spinner" aria-hidden="true"></div>
+      <p><span id="loading-text">Thinking…</span> <span id="loading-timer" class="muted"></span></p>
+      <p class="muted small">Local models can be slow. This may take a minute.</p>
+    </div>
+
+    <!-- Error messages and notices -->
+    <div id="error" class="message error" hidden></div>
+    <div id="notice" class="message notice" hidden></div>
+
+    <!-- Summary result -->
+    <section id="summary-section" class="card" hidden>
+      <h2>Summary</h2>
+      <div id="summary-paragraphs"></div>
+      <h3>Key concepts</h3>
+      <ul id="key-concepts"></ul>
+    </section>
+
+    <!-- Quiz: one question at a time -->
+    <section id="quiz-section" class="card" hidden>
+      <div id="quiz-question-view">
+        <p class="muted" id="quiz-progress"></p>
+        <h2 id="quiz-question"></h2>
+        <div id="quiz-options" class="options"></div>
+        <div id="quiz-feedback" class="feedback" hidden></div>
+        <button type="button" id="next-btn" hidden>Next</button>
+      </div>
+
+      <div id="quiz-result-view" hidden>
+        <h2>Quiz finished!</h2>
+        <p class="score" id="quiz-score"></p>
+        <button type="button" id="retake-btn">Retake quiz</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
