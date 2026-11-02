@@ -1,0 +1,16 @@
+# Secrets / local settings
+.env
+
+# Python cache files
+__pycache__/
+*.pyc
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Editor / OS clutter
+.DS_Store
+.vscode/
+.idea/
